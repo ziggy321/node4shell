@@ -1,24 +1,29 @@
-const spawner = require("./spawner");
-
-class CommandLineInterface {
+abstract class CommandLineInterface {
     readonly defaultBash: String = "/bin/bash";
 
-    moveDirectory(directoryPath: String){
+    makeDirectory(directoryPath: String){
+        spawner.execute(`mkdir ${directoryPath}`);
+    }
+
+    changeDirectory(directoryPath: String){
         spawner.execute(`cd ${directoryPath}`);
     }
 
-    exportByConstant(variable: String, value: String) {
+    move(pathArray: Array<String>){
+        spawner.execute(`mv ${pathArray.join(" ")}`)
+    }
+
+    copy(pathArray: Array<String>){
+        spawner.execute(`cp ${pathArray.join(" ")}`)
+    }
+
+    remove(pathArray: Array<String>){
+        spawner.execute(`rm ${pathArray.join(" ")}`)
+    }
+
+    export(variable: String, value: any) {
         spawner.execute(`export ${variable}=${value}`);
     }
-    exportByString(variable: String, value: String) {
-        spawner.execute(`export ${variable}="${value}"`);
-    }
-    exportByVariable(variable: String, sourceVar: String) {
-        spawner.execute(`export ${variable}=$${sourceVar}`);
-    }
 
-    executeShellScript(shellScriptPath: String, bash: String = this.defaultBash){
-        spawner.execute(`${bash} ${shellScriptPath}`);
-
-    }
+    abstract bash(scriptPath: String, bash: String): any;
 }

@@ -18,7 +18,8 @@ class Spawner {
     encoding: String = "utf8", 
     stdoutFunction: (data: String) => void = this.defaultStdoutFunction, 
     errFunction: (data: String) => void = this.defaultErrFunction,
-    closeFunction: (exitCode: Number) => void = this.defaultCloseFunction) {
+    closeFunction: (exitCode: Number) => void = this.defaultCloseFunction
+  ) {
     const spawned = spawn(command, { shell: true });
     spawned.stdout.setEncoding(encoding);
     spawned.stderr.setEncoding(encoding);
@@ -32,7 +33,8 @@ class Spawner {
     encoding: String = "utf8", 
     stdoutFunction: (data: String) => void = this.defaultStdoutFunction, 
     errFunction: (data: String) => void = this.defaultErrFunction,
-    closeFunction: (exitCode: Number) => void = this.defaultCloseFunction) {
+    closeFunction: (exitCode: Number) => void = this.defaultCloseFunction
+  ) {
     const spawned = spawn(commands.join(" && "), { shell: true });
     spawned.stdout.setEncoding(encoding);
     spawned.stderr.setEncoding(encoding);
